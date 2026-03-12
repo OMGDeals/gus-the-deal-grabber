@@ -84,6 +84,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
           <div className="flex gap-2 pt-1">
             <button
               onClick={onClose}
+              tabIndex={-1}
               className="flex-1 border-2 border-gray-200 text-gray-500 font-bold py-2.5 rounded-xl hover:bg-gray-50 transition text-sm"
             >
               Skip
