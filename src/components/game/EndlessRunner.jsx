@@ -136,11 +136,12 @@ function drawHUD(ctx, s) {
   for (let i = 0; i < 3; i++) hearts += i < s.lives ? '❤️' : '🖤';
   ctx.fillText(hearts, W - 105, 36);
 
-  ctx.fillStyle = 'rgba(0,0,0,0.25)';
-  ctx.fillRect(W / 2 - 65, 10, 130, 28);
+  const phase = s.speed >= 20 ? '🌙 CHAOS' : s.speed >= 14 ? '🌆 DUSK' : s.speed >= 10 ? '🌅 SUNSET' : '☀️ DAY';
+  ctx.fillStyle = s.speed >= 20 ? 'rgba(80,0,80,0.7)' : 'rgba(0,0,0,0.25)';
+  ctx.fillRect(W / 2 - 75, 10, 150, 28);
   ctx.font = 'bold 12px Arial';
-  ctx.fillStyle = 'white';
-  ctx.fillText(`⚡ x${s.speed.toFixed(1)} speed`, W / 2 - 56, 29);
+  ctx.fillStyle = s.speed >= 20 ? '#FF44FF' : 'white';
+  ctx.fillText(`${phase} x${s.speed.toFixed(1)}`, W / 2 - 68, 29);
 }
 
 function drawBalloon(ctx, b) {
