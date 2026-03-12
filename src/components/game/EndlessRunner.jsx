@@ -328,6 +328,14 @@ export default function EndlessRunner() {
         s.obs.push({ x: W + 30, y: GROUND - h, width: 42, height: h, type: t });
       }
 
+      // Spawn balloons (Bad Deal) at speed >= 20
+      if (s.speed >= 20 && s.f % 120 === 0) {
+        const floatY = 60 + Math.random() * 160;
+        s.balloons.push({ x: W + 30, y: floatY, bob: Math.random() * Math.PI * 2 });
+      }
+      s.balloons.forEach(b => { b.x -= s.speed; b.bob += 0.04; b.y += Math.sin(b.bob) * 0.8; });
+      s.balloons = s.balloons.filter(b => b.x > -60);
+
       // Spawn deals
       if (s.f % 88 === 0) {
         const d = DEALS[Math.floor(Math.random() * DEALS.length)];
