@@ -153,6 +153,8 @@ export default function EndlessRunner() {
   const [fScore, setFScore] = useState(0);
   const [fDeals, setFDeals] = useState(0);
   const [best, setBest] = useState(0);
+  const [showSubmit, setShowSubmit] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   useEffect(() => {
     const img = new Image();
