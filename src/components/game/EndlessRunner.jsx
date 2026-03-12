@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import SubmitScoreModal from './SubmitScoreModal';
+import Leaderboard from './Leaderboard';
 
 const W = 800, H = 400;
 const GROUND = 315;
