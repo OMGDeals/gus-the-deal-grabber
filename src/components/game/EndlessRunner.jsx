@@ -64,18 +64,32 @@ function drawObstacle(ctx, o) {
     ctx.font = 'bold 7.5px Arial';
     ctx.fillText('💸 OVERPRICED!', o.x, o.y + 12);
     ctx.fillText('  AVOID! 🚫', o.x + 2, o.y + 24);
-  } else if (o.type === 'wall') {
-    for (let i = 0; i < 2; i++) {
-      ctx.fillStyle = i === 0 ? '#9B1111' : '#821111';
-      ctx.fillRect(o.x, o.y + i * 38, o.width, 35);
-      ctx.strokeStyle = '#5A0A0A';
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(o.x, o.y + i * 38, o.width, 35);
-      ctx.fillStyle = 'white';
-      ctx.font = 'bold 8px Arial';
-      ctx.fillText('💸 BAD', o.x + 3, o.y + i * 38 + 15);
-      ctx.fillText(' DEAL', o.x + 3, o.y + i * 38 + 27);
+  } else if (o.type === 'wall' || o.type === 'tall_wall') {
+    const brickH = 18, brickW = o.width;
+    const rows = Math.ceil(o.height / brickH);
+    for (let r = 0; r < rows; r++) {
+      const rowY = o.y + r * brickH;
+      const rowH = Math.min(brickH - 2, o.y + o.height - rowY);
+      if (rowH <= 0) break;
+      const offset = (r % 2 === 0) ? 0 : 12;
+      // Draw brick row
+      for (let bx = o.x - offset; bx < o.x + brickW; bx += 24) {
+        const bLeft = Math.max(bx, o.x);
+        const bRight = Math.min(bx + 22, o.x + brickW);
+        if (bRight <= bLeft) continue;
+        ctx.fillStyle = r % 3 === 0 ? '#8B2500' : r % 3 === 1 ? '#A52A00' : '#7A1F00';
+        ctx.fillRect(bLeft, rowY, bRight - bLeft, rowH);
+        ctx.strokeStyle = '#5A0A0A';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(bLeft, rowY, bRight - bLeft, rowH);
+      }
     }
+    // Label on top bricks
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(o.x, o.y, o.width, 16);
+    ctx.font = 'bold 7px Arial';
+    ctx.fillStyle = '#FFD700';
+    ctx.fillText(o.type === 'tall_wall' ? '⚠️ PRICEY' : '💸 NOPE', o.x + 2, o.y + 11);
   } else {
     // Price tag shape
     const tx = o.x, ty = o.y;
