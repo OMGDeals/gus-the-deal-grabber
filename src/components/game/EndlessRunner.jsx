@@ -420,6 +420,9 @@ export default function EndlessRunner() {
       // Deals
       s.deals.forEach(d => drawTag(ctx, d.x, d.y + Math.sin(d.bob) * 8, d.emoji, d.label));
 
+      // Bad Deal Balloons
+      s.balloons.forEach(b => drawBalloon(ctx, b));
+
       // Obstacles
       s.obs.forEach(o => drawObstacle(ctx, o));
 
