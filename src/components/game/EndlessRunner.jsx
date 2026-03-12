@@ -471,7 +471,9 @@ export default function EndlessRunner() {
   }, [ui]);
 
   const tap = () => {
-    if (ui === 'menu' || ui === 'gameover') start(); else jump();
+    if (ui === 'menu') start();
+    else if (ui === 'gameover' && !showSubmit) start();
+    else if (ui === 'playing') jump();
   };
 
   return (
