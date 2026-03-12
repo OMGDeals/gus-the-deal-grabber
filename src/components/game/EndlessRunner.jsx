@@ -208,6 +208,27 @@ function lerpColor(c1, c2, t) {
 }
 
 function drawBackground(ctx, boff, speed) {
+  // Dynamic sky
+  const [skyTop, skyBot] = getSkyColors(speed);
+  const sky = ctx.createLinearGradient(0, 0, 0, GROUND);
+  sky.addColorStop(0, skyTop); sky.addColorStop(1, skyBot);
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, W, GROUND);
+
+  // Stars appear at night (speed > 16)
+  if (speed > 16) {
+    const starAlpha = Math.min(1, (speed - 16) / 6);
+    ctx.globalAlpha = starAlpha;
+    ctx.fillStyle = 'white';
+    [[50,20],[150,35],[300,15],[420,40],[580,22],[700,38],[760,12],[100,50],[500,45]].forEach(([sx,sy]) => {
+      const x = ((sx - boff * 0.05) % W + W) % W;
+      ctx.beginPath(); ctx.arc(x, sy, 1.5, 0, Math.PI * 2); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  // Clouds (fade out at night)
+  const cloudAlpha = Math.max(0, 1 - (speed - 14) / 6);
+  ctx.globalAlpha = cloudAlpha;
   ctx.fillStyle = 'rgba(255,255,255,0.8)';
   [[90, 45, 28], [260, 38, 22], [490, 55, 32], [690, 32, 18], [880, 48, 25]].forEach(([cx, cy, r]) => {
     const x = ((cx - boff * 0.2) % (W + 200) + W + 200) % (W + 200) - 100;
