@@ -363,6 +363,20 @@ export default function EndlessRunner() {
         }
       }
 
+      // Balloon collision
+      if (s.inv === 0) {
+        for (const b of s.balloons) {
+          const hx = PX + 10, hw = GUS_W - 20, hy = s.py + 12, hh = GUS_H - 16;
+          const bdy = b.y + Math.sin(b.bob) * 6;
+          if (hx + hw > b.x && hx < b.x + 36 && hy < bdy + 52 && hy + hh > bdy) {
+            s.lives--; s.inv = 80; s.pvy = -8;
+            if (s.lives <= 0) dead = true;
+            s.balloons = s.balloons.filter(bb => bb !== b);
+            break;
+          }
+        }
+      }
+
       if (dead) {
         setFScore(s.score); setFDeals(s.dc);
         setBest(prev => Math.max(prev, s.score));
