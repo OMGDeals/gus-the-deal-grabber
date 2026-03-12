@@ -238,6 +238,7 @@ function drawBackground(ctx, boff, speed) {
     ctx.arc(x - r * 0.55, cy - r * 0.3, r * 0.55, 0, Math.PI * 2);
     ctx.fill();
   });
+  ctx.globalAlpha = 1;
 
   const bldgs = [
     [0, '#C8B2FF', 110, 120], [130, '#A2C8FF', 80, 90], [230, '#FFD4A0', 100, 140],
