@@ -143,7 +143,71 @@ function drawHUD(ctx, s) {
   ctx.fillText(`⚡ x${s.speed.toFixed(1)} speed`, W / 2 - 56, 29);
 }
 
-function drawBackground(ctx, boff) {
+function drawBalloon(ctx, b) {
+  ctx.save();
+  // String
+  ctx.strokeStyle = '#666';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(b.x + 18, b.y + 52);
+  ctx.lineTo(b.x + 18, b.y + 68);
+  ctx.stroke();
+  // Balloon body
+  ctx.shadowColor = '#CC0000';
+  ctx.shadowBlur = 10;
+  ctx.fillStyle = '#DD2222';
+  ctx.strokeStyle = '#881111';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(b.x + 18, b.y + 24, 18, 24, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+  // Knot
+  ctx.fillStyle = '#AA1111';
+  ctx.beginPath();
+  ctx.ellipse(b.x + 18, b.y + 48, 4, 5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // Text
+  ctx.font = 'bold 7px Arial';
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.fillText('BAD', b.x + 18, b.y + 20);
+  ctx.fillText('DEAL', b.x + 18, b.y + 30);
+  ctx.textAlign = 'left';
+  ctx.restore();
+}
+
+function getSkyColors(speed) {
+  // Interpolate sky based on speed: 4=day, 12=sunset, 18=dusk, 20+=night storm
+  if (speed < 12) {
+    const t = (speed - 4) / 8;
+    return [
+      lerpColor('#1E88E5', '#FF7043', t),
+      lerpColor('#B3E5FC', '#FFCCBC', t),
+    ];
+  } else if (speed < 20) {
+    const t = (speed - 12) / 8;
+    return [
+      lerpColor('#FF7043', '#4A148C', t),
+      lerpColor('#FFCCBC', '#880E4F', t),
+    ];
+  } else {
+    return ['#1A0030', '#4A0030'];
+  }
+}
+
+function lerpColor(c1, c2, t) {
+  const h = s => parseInt(s.slice(1), 16);
+  const r1 = (h(c1) >> 16) & 0xFF, g1 = (h(c1) >> 8) & 0xFF, b1 = h(c1) & 0xFF;
+  const r2 = (h(c2) >> 16) & 0xFF, g2 = (h(c2) >> 8) & 0xFF, b2 = h(c2) & 0xFF;
+  const r = Math.round(r1 + (r2 - r1) * t);
+  const g = Math.round(g1 + (g2 - g1) * t);
+  const b = Math.round(b1 + (b2 - b1) * t);
+  return `rgb(${r},${g},${b})`;
+}
+
+function drawBackground(ctx, boff, speed) {
   ctx.fillStyle = 'rgba(255,255,255,0.8)';
   [[90, 45, 28], [260, 38, 22], [490, 55, 32], [690, 32, 18], [880, 48, 25]].forEach(([cx, cy, r]) => {
     const x = ((cx - boff * 0.2) % (W + 200) + W + 200) % (W + 200) - 100;
