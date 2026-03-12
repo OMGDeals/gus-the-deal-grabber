@@ -77,8 +77,33 @@ function drawObstacle(ctx, o) {
       ctx.fillText(' DEAL', o.x + 3, o.y + i * 38 + 27);
     }
   } else {
-    ctx.font = '38px serif';
-    ctx.fillText('💣', o.x + 1, o.y + 40);
+    // Price tag shape
+    const tx = o.x, ty = o.y;
+    const tw = 52, th = 44;
+    ctx.fillStyle = '#CC1111';
+    ctx.strokeStyle = '#880000';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(tx + 14, ty);
+    ctx.lineTo(tx + tw, ty);
+    ctx.lineTo(tx + tw, ty + th);
+    ctx.lineTo(tx + 14, ty + th);
+    ctx.lineTo(tx, ty + th / 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    // Hole
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.arc(tx + 18, ty + th / 2, 4, 0, Math.PI * 2);
+    ctx.fill();
+    // Text
+    ctx.font = 'bold 9px Arial';
+    ctx.fillStyle = 'white';
+    ctx.fillText('FULL', tx + 22, ty + 18);
+    ctx.fillText('PRICE', tx + 20, ty + 30);
+    ctx.font = '11px serif';
+    ctx.fillText('💸', tx + 22, ty + 42);
   }
   ctx.restore();
 }
