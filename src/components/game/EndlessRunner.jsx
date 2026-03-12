@@ -133,7 +133,7 @@ function drawBackground(ctx, boff) {
     ctx.fillRect(x + bw / 2 - 22, GROUND - bh + 3, 44, 14);
     ctx.fillStyle = 'white';
     ctx.font = 'bold 7px Arial';
-    ctx.fillText('DEALS!', x + bw / 2 - 17, GROUND - bh + 12);
+    ctx.fillText('OMG Deals', x + bw / 2 - 20, GROUND - bh + 12);
   });
 }
 
