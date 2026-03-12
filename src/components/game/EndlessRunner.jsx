@@ -237,8 +237,8 @@ export default function EndlessRunner() {
       // Spawn obstacles
       const oi = Math.max(52, 118 - Math.floor(s.dist / 200));
       if (s.f % oi === 0) {
-        const t = ['sign', 'wall', 'bag'][Math.floor(Math.random() * 3)];
-        const h = t === 'wall' ? 76 : 52;
+        const t = ['sign', 'wall', 'tall_wall', 'bag'][Math.floor(Math.random() * 4)];
+        const h = t === 'tall_wall' ? 130 : t === 'wall' ? 76 : 52;
         s.obs.push({ x: W + 30, y: GROUND - h, width: 42, height: h, type: t });
       }
 
