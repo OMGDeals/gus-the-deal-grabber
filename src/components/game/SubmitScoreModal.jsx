@@ -96,6 +96,32 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
               {loading ? 'Submitting...' : '🏷️ Submit!'}
             </button>
           </div>
+
+          <div className="border-t pt-3">
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wide text-center mb-2">Share your score!</p>
+            <div className="flex gap-2">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`🏷️ I scored ${score.toLocaleString()} pts and snagged ${dealsCount} deals in GUS: DEAL HUNTER! Can you beat me? 🏃`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-sm"
+              >
+                👤 Facebook
+              </a>
+              <a
+                href={`https://www.instagram.com/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  navigator.clipboard.writeText(`🏷️ I scored ${score.toLocaleString()} pts and snagged ${dealsCount} deals in GUS: DEAL HUNTER! Can you beat me? 🏃`);
+                  alert('Caption copied! Paste it into your Instagram post 📸');
+                }}
+                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-2.5 rounded-xl transition text-sm"
+              >
+                📸 Instagram
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
