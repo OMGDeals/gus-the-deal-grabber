@@ -233,7 +233,7 @@ export default function EndlessRunner() {
       if (dead) {
         setFScore(s.score); setFDeals(s.dc);
         setBest(prev => Math.max(prev, s.score));
-        setUi('gameover'); return;
+        setUi('gameover'); setShowSubmit(true); return;
       }
 
       // Deal collection
