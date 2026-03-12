@@ -380,7 +380,28 @@ export default function EndlessRunner() {
         )}
       </div>
 
-      <p className="text-white/60 mt-2 text-xs">SPACE / TAP to jump • Double jump available!</p>
+      <div className="flex gap-3 mt-3">
+        <button
+          onClick={() => setShowLeaderboard(true)}
+          className="bg-white/20 hover:bg-white/30 text-white font-bold px-5 py-2 rounded-full text-sm transition"
+        >
+          🏆 Leaderboard
+        </button>
+        <p className="text-white/60 text-xs self-center">SPACE / TAP to jump • Double jump available!</p>
+      </div>
+
+      {showSubmit && ui === 'gameover' && (
+        <SubmitScoreModal
+          score={fScore}
+          dealsCount={fDeals}
+          onClose={() => setShowSubmit(false)}
+          onSubmitted={() => { setShowSubmit(false); setShowLeaderboard(true); }}
+        />
+      )}
+
+      {showLeaderboard && (
+        <Leaderboard onClose={() => setShowLeaderboard(false)} />
+      )}
     </div>
   );
 }
