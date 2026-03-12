@@ -215,8 +215,8 @@ function drawBackground(ctx, boff, speed) {
   ctx.fillStyle = sky; ctx.fillRect(0, 0, W, GROUND);
 
   // Stars appear at night (speed > 16)
-  if (speed > 16) {
-    const starAlpha = Math.min(1, (speed - 16) / 6);
+  if (speed > 10) {
+    const starAlpha = Math.min(1, (speed - 10) / 4);
     ctx.globalAlpha = starAlpha;
     ctx.fillStyle = 'white';
     [[50,20],[150,35],[300,15],[420,40],[580,22],[700,38],[760,12],[100,50],[500,45]].forEach(([sx,sy]) => {
