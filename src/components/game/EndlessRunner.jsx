@@ -299,7 +299,9 @@ export default function EndlessRunner() {
     const kd = (e) => {
       if (e.code === 'Space' || e.code === 'ArrowUp') {
         e.preventDefault();
-        if (ui === 'menu' || ui === 'gameover') start(); else jump();
+        if (ui === 'menu') start();
+        else if (ui === 'gameover' && !showSubmit) start();
+        else if (ui === 'playing') jump();
       }
     };
     window.addEventListener('keydown', kd);
