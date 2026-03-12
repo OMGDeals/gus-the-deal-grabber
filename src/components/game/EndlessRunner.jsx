@@ -180,15 +180,14 @@ function drawBalloon(ctx, b) {
 }
 
 function getSkyColors(speed) {
-  // Interpolate sky based on speed: 4=day, 12=sunset, 18=dusk, 20+=night storm
-  if (speed < 12) {
-    const t = (speed - 4) / 8;
+  if (speed < 8) {
+    const t = (speed - 4) / 4;
     return [
       lerpColor('#1E88E5', '#FF7043', t),
       lerpColor('#B3E5FC', '#FFCCBC', t),
     ];
-  } else if (speed < 20) {
-    const t = (speed - 12) / 8;
+  } else if (speed < 12) {
+    const t = (speed - 8) / 4;
     return [
       lerpColor('#FF7043', '#4A148C', t),
       lerpColor('#FFCCBC', '#880E4F', t),
