@@ -405,11 +405,7 @@ export default function EndlessRunner() {
       s.pops.forEach(p => { p.y -= 1.5; p.life--; });
 
       // === RENDER ===
-      const sky = ctx.createLinearGradient(0, 0, 0, GROUND);
-      sky.addColorStop(0, '#1E88E5'); sky.addColorStop(1, '#B3E5FC');
-      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
-
-      drawBackground(ctx, s.boff);
+      drawBackground(ctx, s.boff, s.speed);
 
       // Ground
       const grd = ctx.createLinearGradient(0, GROUND, 0, H);
