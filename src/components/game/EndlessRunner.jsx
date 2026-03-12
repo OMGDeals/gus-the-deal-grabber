@@ -227,7 +227,7 @@ function drawBackground(ctx, boff, speed) {
   }
 
   // Clouds (fade out at night)
-  const cloudAlpha = Math.max(0, 1 - (speed - 14) / 6);
+  const cloudAlpha = Math.max(0, 1 - (speed - 8) / 4);
   ctx.globalAlpha = cloudAlpha;
   ctx.fillStyle = 'rgba(255,255,255,0.8)';
   [[90, 45, 28], [260, 38, 22], [490, 55, 32], [690, 32, 18], [880, 48, 25]].forEach(([cx, cy, r]) => {
