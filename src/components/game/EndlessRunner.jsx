@@ -264,7 +264,7 @@ function drawBackground(ctx, boff, speed) {
 
 const fresh = () => ({
   py: GROUND - GUS_H, pvy: 0, pjumps: 0,
-  obs: [], deals: [], parts: [], pops: [],
+  obs: [], deals: [], balloons: [], parts: [], pops: [],
   speed: 4, dist: 0, score: 0, dc: 0,
   lives: 3, inv: 0, f: 0, boff: 0, ra: 0,
 });
