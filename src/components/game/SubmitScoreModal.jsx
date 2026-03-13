@@ -50,7 +50,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
           </div>
           <div className="flex gap-2 mb-3">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://www.omgdeals.co/deal-runner')}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://omgdealsgrabber.base44.app')}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
