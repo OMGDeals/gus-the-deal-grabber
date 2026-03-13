@@ -7,7 +7,7 @@ const GROUND = 315;
 const PX = 85;
 const GRAVITY = 0.55;
 const JUMP_VEL = -13;
-const GUS_W = 62, GUS_H = 68;
+const GUS_W = 68, GUS_H = 68;
 
 const DEALS = [
   { emoji: '💻', label: '50% OFF!' },
