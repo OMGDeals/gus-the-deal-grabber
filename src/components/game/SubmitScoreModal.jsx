@@ -50,7 +50,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
           </div>
           <div className="flex gap-2 mb-3">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareText)}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&picture=${encodeURIComponent('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b33333f96da5ecbafb752a/e6670afca_Gus_Body.png')}&title=${encodeURIComponent(`🏷️ I scored ${score.toLocaleString()} pts in GUS: DEAL HUNTER!`)}&description=${encodeURIComponent(shareText)}&quote=${encodeURIComponent(shareText)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-sm"
