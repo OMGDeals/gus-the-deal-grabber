@@ -622,20 +622,58 @@ export default function EndlessRunner() {
       // Obstacles
       s.obs.forEach(o => drawObstacle(ctx, o));
 
+      // Gus ground shadow
+      const onGround = s.py >= GROUND - GUS_H - 2;
+      const shadowScale = onGround ? 1 : Math.max(0.3, 1 - (GROUND - GUS_H - s.py) / 180);
+      ctx.save();
+      ctx.globalAlpha = 0.22 * shadowScale;
+      ctx.fillStyle = '#000';
+      ctx.scale(1, 0.28);
+      ctx.beginPath();
+      ctx.ellipse(PX + GUS_W / 2, (GROUND) / 0.28, GUS_W * 0.52 * shadowScale, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Running dust when on ground
+      if (onGround && s.f % 6 === 0) {
+        s.parts.push({
+          x: PX + 5 + Math.random() * 10,
+          y: GROUND - 4,
+          vx: -s.speed * 0.5 - Math.random() * 2,
+          vy: -(0.5 + Math.random() * 1.2),
+          life: 18,
+          c: 'rgba(200,190,170,0.7)',
+          dust: true,
+        });
+      }
+
       // Gus (flash when invincible)
       if (s.inv === 0 || Math.floor(s.f / 5) % 2 === 0) {
-        const bob = s.pjumps === 0 ? Math.sin(s.ra * 2) * 2 : 0;
+        const bob = s.pjumps === 0 ? Math.sin(s.ra * 2) * 2.5 : 0;
+        ctx.save();
         if (gusImg.current) {
-          ctx.drawImage(gusImg.current, PX, s.py + bob, GUS_W, GUS_H);
+          // Glow outline when in-air (jumping)
+          if (s.pjumps > 0) {
+            ctx.shadowColor = '#FFD700';
+            ctx.shadowBlur = 18;
+          }
+          // Slight squash/stretch: stretch when jumping up, squash on landing
+          const scaleY = s.pvy < -4 ? 1.08 : s.pvy > 6 ? 0.93 : 1;
+          const scaleX = scaleY < 1 ? 1.08 : scaleY > 1 ? 0.94 : 1;
+          const cx = PX + GUS_W / 2, cy = s.py + bob + GUS_H / 2;
+          ctx.translate(cx, cy);
+          ctx.scale(scaleX, scaleY);
+          ctx.drawImage(gusImg.current, -GUS_W / 2, -GUS_H / 2, GUS_W, GUS_H);
         } else {
           ctx.fillStyle = '#FF8C00';
           ctx.beginPath();
-          ctx.arc(PX + 31, s.py + 34, 30, 0, Math.PI * 2);
+          ctx.arc(PX + 31, s.py + bob + 34, 30, 0, Math.PI * 2);
           ctx.fill();
           ctx.fillStyle = 'white';
           ctx.font = 'bold 14px Arial';
-          ctx.fillText('GUS', PX + 17, s.py + 40);
+          ctx.fillText('GUS', PX + 17, s.py + bob + 40);
         }
+        ctx.restore();
       }
 
       // Particles
