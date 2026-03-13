@@ -35,7 +35,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
     setSubmitted(true);
   };
 
-  const shareText = `🏷️ I scored ${score.toLocaleString()} pts and snagged ${dealsCount} deals in GUS: DEAL HUNTER! Can you beat me? 🏃`;
+  const shareText = `I don't think anyone can beat my new score of ${score.toLocaleString()} pts on Gus' Deal Runner game.\n\nThink you got what it takes to top my score?\n\nVisit www.omgdeals.co/deal-runner to play me!`;
 
   if (submitted) {
     return (
