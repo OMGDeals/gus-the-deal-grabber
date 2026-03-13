@@ -678,9 +678,16 @@ export default function EndlessRunner() {
 
       // Particles
       s.parts.forEach(p => {
-        ctx.globalAlpha = p.life / 55;
-        ctx.fillStyle = p.c;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI * 2); ctx.fill();
+        if (p.dust) {
+          ctx.globalAlpha = (p.life / 18) * 0.5;
+          ctx.fillStyle = p.c;
+          const r = 3 + (1 - p.life / 18) * 5;
+          ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill();
+        } else {
+          ctx.globalAlpha = p.life / 55;
+          ctx.fillStyle = p.c;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI * 2); ctx.fill();
+        }
       });
       ctx.globalAlpha = 1;
 
