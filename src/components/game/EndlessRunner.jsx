@@ -537,7 +537,10 @@ export default function EndlessRunner() {
         >
           🏆 Leaderboard
         </button>
-        <p className="text-white/60 text-xs self-center">SPACE / TAP to jump • Double jump available!</p>
+        <div className="flex flex-col self-center">
+          <p className="text-white/60 text-xs">SPACE / TAP to jump • Double jump available!</p>
+          <p className="text-white/60 text-xs">Mobile: Tap in game screen to jump. Double Tap to double jump.</p>
+        </div>
       </div>
 
       {showSubmit && ui === 'gameover' && (
