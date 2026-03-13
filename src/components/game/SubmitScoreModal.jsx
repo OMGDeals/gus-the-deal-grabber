@@ -35,6 +35,52 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
     setSubmitted(true);
   };
 
+  const shareText = `🏷️ I scored ${score.toLocaleString()} pts and snagged ${dealsCount} deals in GUS: DEAL HUNTER! Can you beat me? 🏃`;
+
+  if (submitted) {
+    return (
+      <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center">
+          <div className="text-4xl mb-2">🎉</div>
+          <h2 className="text-2xl font-black text-orange-500 mb-1">Score Submitted!</h2>
+          <p className="text-gray-400 text-sm mb-4">Now share your score and challenge your friends!</p>
+          <div className="bg-orange-50 rounded-xl p-3 mb-4">
+            <p className="text-3xl font-black text-orange-600">{score.toLocaleString()}</p>
+            <p className="text-sm text-gray-500">🏷️ {dealsCount} deals snagged</p>
+          </div>
+          <div className="flex gap-2 mb-3">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareText)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-sm"
+            >
+              👤 Facebook
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                navigator.clipboard.writeText(shareText);
+                alert('Caption copied! Paste it into your Instagram post 📸');
+              }}
+              className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-2.5 rounded-xl transition text-sm"
+            >
+              📸 Instagram
+            </a>
+          </div>
+          <button
+            onClick={onSubmitted}
+            className="w-full border-2 border-gray-200 text-gray-500 font-bold py-2.5 rounded-xl hover:bg-gray-50 transition text-sm"
+          >
+            View Leaderboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6">
@@ -97,32 +143,6 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
             >
               {loading ? 'Submitting...' : '🏷️ Submit!'}
             </button>
-          </div>
-
-          <div className="border-t pt-3">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-wide text-center mb-2">Share your score!</p>
-            <div className="flex gap-2">
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`🏷️ I scored ${score.toLocaleString()} pts and snagged ${dealsCount} deals in GUS: DEAL HUNTER! Can you beat me? 🏃`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-sm"
-              >
-                👤 Facebook
-              </a>
-              <a
-                href={`https://www.instagram.com/`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  navigator.clipboard.writeText(`🏷️ I scored ${score.toLocaleString()} pts and snagged ${dealsCount} deals in GUS: DEAL HUNTER! Can you beat me? 🏃`);
-                  alert('Caption copied! Paste it into your Instagram post 📸');
-                }}
-                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-2.5 rounded-xl transition text-sm"
-              >
-                📸 Instagram
-              </a>
-            </div>
           </div>
         </div>
       </div>
