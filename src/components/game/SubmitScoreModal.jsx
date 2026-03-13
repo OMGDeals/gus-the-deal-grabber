@@ -50,9 +50,13 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
           </div>
           <div className="flex gap-2 mb-3">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://www.omgdeals.co/deal-runner')}&quote=${encodeURIComponent(shareText)}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://www.omgdeals.co/deal-runner')}`}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                navigator.clipboard.writeText(shareText);
+                alert('Your score text has been copied! 📋 Paste it into your Facebook post.');
+              }}
               className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-sm"
             >
               👤 Facebook
