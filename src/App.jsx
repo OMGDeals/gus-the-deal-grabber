@@ -8,6 +8,11 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 // Add page imports here
 import Game from './pages/Game';
 
+// Set browser tab title and favicon
+document.title = 'Gus: Deal Hunter';
+const favicon = document.querySelector("link[rel='icon']");
+if (favicon) favicon.href = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b33333f96da5ecbafb752a/e6670afca_Gus_Body.png';
+
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
