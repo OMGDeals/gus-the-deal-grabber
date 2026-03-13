@@ -13,6 +13,18 @@ document.title = 'Gus: Deal Hunter';
 const favicon = document.querySelector("link[rel='icon']");
 if (favicon) favicon.href = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b33333f96da5ecbafb752a/e6670afca_Gus_Body.png';
 
+// Set Open Graph meta tags for social sharing
+const setMeta = (property, content) => {
+  let el = document.querySelector(`meta[property="${property}"]`);
+  if (!el) { el = document.createElement('meta'); el.setAttribute('property', property); document.head.appendChild(el); }
+  el.setAttribute('content', content);
+};
+setMeta('og:title', 'Gus: Deal Hunter 🏷️');
+setMeta('og:description', "Think you can beat my score? Help Gus snag the best deals and dodge overpriced obstacles! Visit www.omgdeals.co/deal-runner to play!");
+setMeta('og:image', 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b33333f96da5ecbafb752a/e6670afca_Gus_Body.png');
+setMeta('og:url', 'https://omgdealsgrabber.base44.app');
+setMeta('og:type', 'website');
+
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
