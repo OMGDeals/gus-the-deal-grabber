@@ -61,19 +61,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
             >
               👤 Facebook
             </a>
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                navigator.clipboard.writeText(shareText);
-                alert('Caption copied! Paste it into your Instagram post 📸');
-              }}
 
-              className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-2.5 rounded-xl transition text-sm"
-            >
-              📸 Instagram
-            </a>
           </div>
           <button
             onClick={onSubmitted}
