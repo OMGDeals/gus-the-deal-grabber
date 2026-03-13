@@ -18,6 +18,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
   const [platform, setPlatform] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
     if (!name.trim()) { setError('Enter your social media name!'); return; }
@@ -31,7 +32,7 @@ export default function SubmitScoreModal({ score, dealsCount, onClose, onSubmitt
       deals_snagged: dealsCount,
     });
     setLoading(false);
-    onSubmitted();
+    setSubmitted(true);
   };
 
   return (
