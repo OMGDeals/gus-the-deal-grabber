@@ -1,0 +1,36 @@
+{
+  "name": "LeaderboardEntry",
+  "type": "object",
+  "properties": {
+    "player_name": {
+      "type": "string",
+      "description": "Social media handle/name"
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "X / Twitter",
+        "Instagram",
+        "TikTok",
+        "Facebook",
+        "YouTube",
+        "Reddit",
+        "LinkedIn"
+      ],
+      "description": "Social media platform"
+    },
+    "score": {
+      "type": "number",
+      "description": "Final score"
+    },
+    "deals_snagged": {
+      "type": "number",
+      "description": "Number of deals collected"
+    }
+  },
+  "required": [
+    "player_name",
+    "platform",
+    "score"
+  ]
+}
